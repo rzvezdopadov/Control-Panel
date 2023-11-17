@@ -1,0 +1,13 @@
+{
+    "server": "production",
+    "jwtSecret": "sh25b17n",
+    "defaultPassAdmin": "123456789",
+    "saltpass": 4,
+    "httpPort": 5000,
+    "socketPort": 8000,
+    "DBuser": "postgres",
+	"DBhost": "localhost",
+	"DBdatabase": "control-panel",
+	"DBpassword": "123456789",
+	"DBport": 5432
+}
