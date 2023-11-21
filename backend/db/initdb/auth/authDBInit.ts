@@ -6,6 +6,7 @@ export async function initDBAuth(): Promise<boolean> {
 		`
             CREATE TABLE IF NOT EXISTS ${DATABASE.auth} (
 				id serial PRIMARY KEY,
+				login TEXT,
                 password TEXT,
                 jwt JSON[],
                 acctype TEXT,
