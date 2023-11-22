@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES5",
+      "ScriptHost",
+      "ES2016.Array.Include",
+    ],
+    "jsx": "react-jsx",
+    "declaration": true,
+    "sourceMap": true,
+    "outDir": "./staticD",
+    "strict": true,
+    "moduleResolution": "node",
+    "typeRoots": [
+      "node_modules/@types",
+      "src/typings.d.ts"
+    ],
+    "esModuleInterop": true, 
+    "experimentalDecorators": true, 
+    "emitDecoratorMetadata": true
+  },
+  "include": [
+    "src"
+  ]
+  ,"exclude": [
+    "node_modules"
+  ],
+}
