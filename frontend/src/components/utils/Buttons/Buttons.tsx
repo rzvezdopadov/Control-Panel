@@ -1,6 +1,6 @@
-import { ILink } from "../interfaces/inavigation";
+import { ILink } from "../../interfaces/inavigation";
 import { Link } from "react-router-dom";
-import { ButtonNaviWrapper } from "../wrappers/ButtonsWrapper";
+import { ButtonNaviWrapper } from "./ButtonsWrapper";
 
 export function ButtonNavigationLink(payload: { link: ILink; naviKey: string }) {
 	return (

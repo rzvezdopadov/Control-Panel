@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { ILink } from "../interfaces/inavigation";
 import { store } from "../../store/store";
 import { ACCTYPE } from "../../../../global/roles";
-import { ButtonNavigationLink } from "../utils/Buttons";
+import { ButtonNavigationLink } from "../utils/Buttons/Buttons";
 import { Logout } from "../pages/Logout";
 
 export const linkNoAuth: ILink[] = [
