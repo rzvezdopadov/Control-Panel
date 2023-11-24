@@ -38,9 +38,9 @@ export const authAPI = {
 					jwt: newToken,
 					message: "Вы успешно авторизовались!",
 				});
-			} else {
-				return answerStatus.err400(res, "Ошибка QTDB!");
 			}
+
+			return answerStatus.err400(res, "Ошибка QTDB!");
 		} catch (error) {
 			console.log(error);
 			return answerStatus.err500(res, "Что-то пошло не так при аутентификации!");
