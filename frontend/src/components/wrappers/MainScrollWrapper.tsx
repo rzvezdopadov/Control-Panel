@@ -1,7 +1,7 @@
 import React from "react";
 
 export function MainScrollWrapper(payload: {
-	children: React.ReactNode;
+	children?: React.ReactNode;
 	loader?: boolean;
 	shadow?: boolean;
 	color?: boolean;
