@@ -1,6 +1,36 @@
 import { ILink } from "../../interfaces/inavigation";
 import { Link } from "react-router-dom";
 import { ButtonNaviWrapper } from "./ButtonsWrapper";
+import React from "react";
+
+export const Button = React.forwardRef(
+	(
+		payload: {
+			value: string;
+			onClick: React.MouseEventHandler<HTMLButtonElement>;
+			checked?: boolean;
+		},
+		ref: React.Ref<HTMLButtonElement>
+	) => {
+		return (
+			<div className="flex items-center justify-center m-1">
+				<button
+					className={
+						"flex items-center select-none text-white shadow-[0px_0px_2px_2px] shadow-lime-300 m-1 py-2 px-4 h-6 rounded-md" +
+						(payload.checked === true
+							? " bg-yellow-600 cursor-auto"
+							: " bg-lime-600 hover:bg-lime-800 cursor-pointer")
+					}
+					type="button"
+					ref={ref}
+					onClick={payload.onClick}
+				>
+					{payload.value}
+				</button>
+			</div>
+		);
+	}
+);
 
 export function ButtonNavigationLink(payload: { link: ILink; naviKey: string }) {
 	return (
