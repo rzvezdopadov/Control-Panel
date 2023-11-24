@@ -8,9 +8,32 @@ import { ACCTYPE } from "../../../../global/roles";
 import { DispatcherPanel } from "../pages/DispatcerPanel";
 import { AdminPanel } from "../pages/AdminPanel";
 import { MockPage } from "../pages/MockPage";
+import { useQueryGetProfile } from "../../api/profile/profile.api.hook";
+import { useEffect } from "react";
+import { modalMessageOpen } from "../modal/ModalMessage";
+import { userMyProfileAction } from "../../store/reducers/profile";
 
 export function AppMain() {
 	const { jwt, userMyProfile } = store.getState();
+	const { dataGetProfile, errorGetProfile, querySendGetProfile } = useQueryGetProfile();
+
+	useEffect(() => {
+		if (jwt) {
+			setTimeout(() => querySendGetProfile({ userid: "0" }), 200);
+		}
+	}, [jwt]);
+
+	useEffect(() => {
+		if (!dataGetProfile) return;
+
+		store.dispatch(userMyProfileAction(dataGetProfile));
+	}, [dataGetProfile]);
+
+	useEffect(() => {
+		if (!errorGetProfile) return;
+
+		modalMessageOpen(errorGetProfile.response.data.message);
+	}, [errorGetProfile]);
 
 	return (
 		<MainWrapper>
