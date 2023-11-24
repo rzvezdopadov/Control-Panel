@@ -4,6 +4,10 @@ import { MainWrapper } from "../wrappers/MainWrapper";
 import { Logout } from "../pages/Logout";
 import { Login } from "../pages/Login";
 import { UserQueryDispatcher } from "../pages/UserQueryDispatcher";
+import { ACCTYPE } from "../../../../global/roles";
+import { DispatcherPanel } from "../pages/DispatcerPanel";
+import { AdminPanel } from "../pages/AdminPanel";
+import { MockPage } from "../pages/MockPage";
 
 export function AppMain() {
 	const { jwt, userMyProfile } = store.getState();
@@ -12,20 +16,35 @@ export function AppMain() {
 		<MainWrapper>
 			<Routes>
 				{jwt ? (
-					userMyProfile?.userid !== "" ? (
-						<>
-							<Route path="/logout" element={<Logout />} />
-
-							<Route path="/*" element={<Login />} />
-						</>
-					) : (
-						<Route path="/*" element={<></>} />
-					)
+					<>
+						<Route path="/logout" element={<Logout />} />
+						{userMyProfile.userid !== "" ? (
+							userMyProfile.acctype === ACCTYPE.user ? (
+								<>
+									<Route path="/*" element={<UserQueryDispatcher />} />
+								</>
+							) : userMyProfile.acctype === ACCTYPE.dispatcher ? (
+								<>
+									<Route path="/*" element={<DispatcherPanel />} />
+								</>
+							) : userMyProfile.acctype === ACCTYPE.admin ? (
+								<>
+									<Route path="/*" element={<AdminPanel />} />
+								</>
+							) : (
+								<>
+									<Route path="/*" element={<MockPage />} />
+								</>
+							)
+						) : (
+							<>
+								<Route path="/*" element={<MockPage />} />
+							</>
+						)}
+					</>
 				) : (
 					<>
-						<Route path="/login" element={<Login />} />
-
-						<Route path="/*" element={<UserQueryDispatcher />} />
+						<Route path="/*" element={<Login />} />
 					</>
 				)}
 			</Routes>
