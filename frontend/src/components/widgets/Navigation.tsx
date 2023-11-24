@@ -37,7 +37,7 @@ export function Navigation(payload: { naviKey: string }) {
 				})}
 			</>
 		);
-	}, [jwt, userMyProfile.acctype, userMyProfile.userid]);
+	}, [jwt, userMyProfile.userid]);
 
 	return NavigationMemo;
 }
