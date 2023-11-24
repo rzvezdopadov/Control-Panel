@@ -2,10 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { logout } from "../helpers/logout";
 import { IQueryAnswer } from "./iquerys.api";
-import {
-	modalLoadingOnHide,
-	modalLoadingOnShow,
-} from "../components/modal/ModalLoading";
+import { modalLoadingOnHide, modalLoadingOnShow } from "../components/modal/ModalLoading";
 
 function testOnBadTokenStatus(message: string) {
 	if (
@@ -15,8 +12,6 @@ function testOnBadTokenStatus(message: string) {
 	) {
 		setTimeout(() => {
 			logout();
-
-			document.location.href = "/";
 		}, 1500);
 	}
 }
@@ -131,11 +126,7 @@ export function useQueryDelete() {
 	const [error, setErrorAnswer] = useState("");
 	const [loaded, setLoaded] = useState(false);
 
-	const querySend = async (
-		link: string = "",
-		data: {} = {},
-		modalLoad: boolean = false
-	) => {
+	const querySend = async (link: string = "", data: {} = {}, modalLoad: boolean = false) => {
 		if (modalLoad) modalLoadingOnShow();
 		setLoaded(true);
 
