@@ -90,7 +90,7 @@ export const authUtils = {
 
 			const answerSetJWT = await authDB.setJWT(userId, newJWTs);
 
-			return answerSetJWT;
+			return answerSetJWT ? token : "";
 		} catch (error) {
 			return "";
 		}

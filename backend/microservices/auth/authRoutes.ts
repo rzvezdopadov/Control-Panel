@@ -8,7 +8,7 @@ const { check } = require("express-validator");
 router.post(
 	"/api/login",
 	[
-		check("login", "Некоректный логин").isLength({ min: 8, max: 30 }),
+		check("login", "Некоректный логин").isLength({ min: 1, max: 30 }),
 		check("password", "Некоректный пароль").isLength({ min: 8, max: 30 }),
 	],
 	authAPI.login
