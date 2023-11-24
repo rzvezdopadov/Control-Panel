@@ -30,7 +30,8 @@ app.use((req, res, next) => {
 app.use("/static", express.static(__dirname + "./../static"));
 app.use("/favicon.ico", express.static(__dirname + "./../favicon.ico"));
 
-//app.use("/", require("./microservices/auth/authRoutes"));
+app.use("/", require("./microservices/auth/authRoutes"));
+app.use("/", require("./microservices/profile/profileRoutes"));
 
 app.use("/", require("./api"));
 
