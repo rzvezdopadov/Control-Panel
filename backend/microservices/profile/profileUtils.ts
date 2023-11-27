@@ -44,7 +44,17 @@ export const profileUtils = {
 
 			return profile;
 		} catch (error) {
-			console.log(`${TimeDate.getTimedateNow()} profileUtils => get: `, error);
+			console.log(`${TimeDate.getTimedateNow()} profileUtils => getFull: `, error);
+			return undefined;
+		}
+	},
+	async getShort(userId: string) {
+		try {
+			const profile = await profileDB.getShort(userId);
+
+			return profile;
+		} catch (error) {
+			console.log(`${TimeDate.getTimedateNow()} profileUtils => getShort: `, error);
 			return undefined;
 		}
 	},
@@ -54,7 +64,7 @@ export const profileUtils = {
 
 			return answer;
 		} catch (error) {
-			console.log(`${TimeDate.getTimedateNow()} profileUtils => set: `, error);
+			console.log(`${TimeDate.getTimedateNow()} profileUtils => changeShort: `, error);
 			return undefined;
 		}
 	},

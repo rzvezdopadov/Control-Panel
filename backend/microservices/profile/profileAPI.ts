@@ -69,7 +69,7 @@ export const profileAPI = {
 				userIdNew = jwtDecode.userId;
 			}
 
-			const profile = await profileUtils.getFull(userIdNew);
+			const profile = await profileUtils.getShort(userIdNew);
 
 			if (!profile) return answerStatus.err400(res, "Ошибка QTDB!");
 

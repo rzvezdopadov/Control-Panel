@@ -17,6 +17,7 @@ export interface IProfileDBFull extends IProfileDBShort {
 	jwt: IJWT[];
 }
 
+const paramsProfileShort = `userid, login, acctype, place, bio`;
 const paramsProfileFull = `userid, login, password, jwt, acctype, place, bio`;
 
 export const profileDB = {
@@ -50,6 +51,19 @@ export const profileDB = {
 			return undefined;
 		} catch (error) {
 			console.log(`${TimeDate.getTimedateNow()} profileDB => getFull: `, error);
+			return undefined;
+		}
+	},
+	async getShort(userid: string): Promise<IProfileDBShort> {
+		try {
+			const queryStr = `SELECT ${paramsProfileShort} FROM ${DATABASE.auth} WHERE userid = '${userid}'`;
+			const answerDB = await poolDB.query(queryStr);
+
+			if (answerDB.rows[0]) return answerDB.rows[0];
+
+			return undefined;
+		} catch (error) {
+			console.log(`${TimeDate.getTimedateNow()} profileDB => getShort: `, error);
 			return undefined;
 		}
 	},
