@@ -7,6 +7,14 @@ export const normalize = {
 
 		return str;
 	},
+	deleteDot(str: string): string {
+		if (!str) return "";
+		if (typeof str !== "string") return "";
+
+		str = str.replace(/['.']/g, "");
+
+		return str;
+	},
 	deleteEmptyString(arr: String[]) {
 		const newArr: String[] = [];
 

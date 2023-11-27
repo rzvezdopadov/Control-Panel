@@ -1,5 +1,5 @@
 import { answerStatus } from "../../utils/answerstatus";
-import { normalize } from "../../utils/normalize";
+import { normalize } from "../../../utils/normalize";
 import { Request, Response } from "express";
 import { testToken } from "../auth/token";
 import { ACCTYPE } from "../../../global/roles";

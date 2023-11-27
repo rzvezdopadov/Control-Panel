@@ -4,7 +4,7 @@ import { IChangePass, ILogin } from "./iauth";
 import { authDB } from "./authDB";
 import { testToken } from "./token";
 import { answerStatus } from "../../utils/answerstatus";
-import { normalize } from "../../utils/normalize";
+import { normalize } from "../../../utils/normalize";
 import { authUtils } from "./authUtils";
 
 const config = require("config");

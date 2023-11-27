@@ -1,4 +1,4 @@
-import { normalize } from "../../utils/normalize";
+import { normalize } from "../../../utils/normalize";
 import { authDB } from "./authDB";
 
 const config = require("config");
