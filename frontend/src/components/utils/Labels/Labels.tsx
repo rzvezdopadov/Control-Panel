@@ -1,5 +1,3 @@
-import { MouseEventHandler } from "react";
-
 export function Label(payload: {
 	value?: string;
 	fontsize?: string;
@@ -32,37 +30,4 @@ export function LabelPageName(payload: { value: string }) {
 
 export function LabelWidget(payload: { value: string }) {
 	return <Label value={payload.value} fontsize={"text-base"} bold={true}></Label>;
-}
-
-export function LabelRating(payload: {
-	value: number;
-	onClick?: MouseEventHandler<HTMLDivElement>;
-}) {
-	return (
-		<div
-			className={`flex select-none shadow-[0px_0px_2px_2px] shadow-lime-300 bg-orange-700 justify-center my-2 rounded-md${
-				payload.onClick ? " cursor-pointer" : ""
-			}`}
-			title="Рейтинг пользователя"
-			key={`Rating${payload.value}`}
-			onClick={payload.onClick ? payload.onClick : () => {}}
-		>
-			{`Рейтинг: ${payload.value}`}
-		</div>
-	);
-}
-
-export function LabelCash(payload: { value: number; onClick?: MouseEventHandler<HTMLDivElement> }) {
-	return (
-		<div
-			className={`flex select-none shadow-[0px_0px_2px_2px] shadow-lime-300 bg-orange-700 justify-center my-2 rounded-md${
-				payload.onClick ? " cursor-pointer" : ""
-			}`}
-			title="MY-Баллы платежная валюта сайта"
-			key={`Cash${payload.value}`}
-			onClick={payload.onClick ? payload.onClick : () => {}}
-		>
-			{`MY-Баллы: ${payload.value}`}
-		</div>
-	);
 }
