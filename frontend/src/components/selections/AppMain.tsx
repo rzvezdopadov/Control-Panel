@@ -5,7 +5,7 @@ import { Logout } from "../pages/Logout";
 import { Login } from "../pages/Login";
 import { UserQueryDispatcher } from "../pages/UserQueryDispatcher";
 import { ACCTYPE } from "../../../../global/roles";
-import { DispatcherPanel } from "../pages/DispatcerPanel";
+import { DispatcherPanel } from "../pages/DispatcherPanel";
 import { AdminPanel } from "../pages/AdminPanel";
 import { MockPage } from "../pages/MockPage";
 import { useQueryGetProfile } from "../../api/profile/profile.api.hook";
