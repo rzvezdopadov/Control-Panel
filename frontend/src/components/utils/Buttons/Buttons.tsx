@@ -6,8 +6,8 @@ import React from "react";
 export const Button = React.forwardRef(
 	(
 		payload: {
-			value: string;
-			onClick: React.MouseEventHandler<HTMLButtonElement>;
+			value?: string;
+			onClick?: React.MouseEventHandler<HTMLButtonElement>;
 			checked?: boolean;
 		},
 		ref: React.Ref<HTMLButtonElement>
@@ -23,9 +23,9 @@ export const Button = React.forwardRef(
 					}
 					type="button"
 					ref={ref}
-					onClick={payload.onClick}
+					onClick={payload.onClick ? payload.onClick : () => {}}
 				>
-					{payload.value}
+					{payload.value ? payload.value : <></>}
 				</button>
 			</div>
 		);
