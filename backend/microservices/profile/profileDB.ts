@@ -67,6 +67,19 @@ export const profileDB = {
 			return undefined;
 		}
 	},
+	async getShortAll(acctype: ACCTYPE): Promise<IProfileDBShort[]> {
+		try {
+			const queryStr = `SELECT ${paramsProfileShort} FROM ${DATABASE.auth} WHERE acctype = '${acctype}'`;
+			const answerDB = await poolDB.query(queryStr);
+
+			if (answerDB.rows) return answerDB.rows;
+
+			return undefined;
+		} catch (error) {
+			console.log(`${TimeDate.getTimedateNow()} profileDB => getShortAll: `, error);
+			return undefined;
+		}
+	},
 	async changeShort(profile: IProfileDBShort): Promise<IProfileDBShort> {
 		try {
 			let queryStr =

@@ -2,7 +2,12 @@
 
 import { IQueryAnswerError } from "../iquerys.api";
 import { useQueryGet } from "../../api/querys.api.hook";
-import { IQueryGetProfile, IQueryAnswerGetProfile } from "./iprofile.api";
+import {
+	IQueryGetProfile,
+	IQueryAnswerGetProfile,
+	IQueryGetProfiles,
+	IQueryAnswerGetProfiles,
+} from "./iprofile.api";
 import { IProfile } from "../../components/interfaces/iprofiles";
 
 /* Get profile 
@@ -24,6 +29,26 @@ export function useQueryGetProfile() {
 		errorGetProfile: errorNew,
 		loadedGetProfile: loaded,
 		querySendGetProfile,
+	};
+
+	return queryAnswer;
+}
+
+export function useQueryGetProfiles() {
+	const { data, error, loaded, querySend } = useQueryGet();
+
+	const querySendGetProfiles = async (dataQuery: IQueryGetProfiles) => {
+		querySend("/api/profiles", dataQuery, true);
+	};
+
+	const dataNew = data as IProfile[];
+	const errorNew = error as IQueryAnswerError;
+
+	const queryAnswer: IQueryAnswerGetProfiles = {
+		dataGetProfiles: dataNew,
+		errorGetProfiles: errorNew,
+		loadedGetProfiles: loaded,
+		querySendGetProfiles,
 	};
 
 	return queryAnswer;

@@ -58,6 +58,16 @@ export const profileUtils = {
 			return undefined;
 		}
 	},
+	async getShortAll(acctype: ACCTYPE) {
+		try {
+			const profile = await profileDB.getShortAll(acctype);
+
+			return profile;
+		} catch (error) {
+			console.log(`${TimeDate.getTimedateNow()} profileUtils => getShortAll: `, error);
+			return undefined;
+		}
+	},
 	async changeShort(profile: IProfileDBShort) {
 		try {
 			const answer = await profileDB.changeShort(profile);

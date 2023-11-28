@@ -79,6 +79,27 @@ export const profileAPI = {
 			return answerStatus.err500(res, "Что-то пошло не так при аутентификации!");
 		}
 	},
+	async getAll(req: Request, res: Response) {
+		try {
+			let { jwt }: { jwt: string } = req.cookies;
+			jwt = normalize.deleteSpace(jwt);
+
+			const jwtDecode = await testToken(jwt);
+
+			if (!jwtDecode) return answerStatus.failJWT(res);
+
+			let { acctype } = req.query as { acctype: ACCTYPE };
+
+			const profile = await profileUtils.getShortAll(acctype);
+
+			if (!profile) return answerStatus.err400(res, "Ошибка QTDB!");
+
+			return res.status(200).json(profile);
+		} catch (error) {
+			console.log(error);
+			return answerStatus.err500(res, "Что-то пошло не так при аутентификации!");
+		}
+	},
 	async change(req: Request, res: Response) {
 		try {
 			let { jwt }: { jwt: string } = req.cookies;
