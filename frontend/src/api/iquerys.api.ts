@@ -6,17 +6,17 @@ export interface IQueryAnswer {
 }
 
 export interface IQueryAnswerError {
-	message: "";
-	name: "";
-	code: "";
+	message: string;
+	name: string;
+	code: string;
 	response: {
 		data: {
-			message: "";
+			message: string;
 		};
 	};
 	status: number;
 }
 
 export interface IQueryAnswerMessageData {
-	msg: "";
+	msg: string;
 }
