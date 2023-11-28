@@ -40,7 +40,7 @@ export function AdminPanel() {
 			<Table
 				headTitle={["Место", "ФИО", "Логин", "Тип аккаунта", "userID"]}
 				propertySeq={["place", "bio", "login", "acctype", "userid"]}
-				data={dataGetProfiles}
+				data={profiles}
 			></Table>
 		</MainScrollWrapper>
 	);
