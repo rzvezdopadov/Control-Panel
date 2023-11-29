@@ -1,5 +1,5 @@
 import { IQueryAnswerMessageData, IQueryAnswerError } from "../iquerys.api";
-import { useQueryPost, useQueryPut } from "../querys.api.hook";
+import { useQuery } from "../querys.api.hook";
 import {
 	IQueryAnswerLoginData,
 	IQueryAnswerLogin,
@@ -10,44 +10,46 @@ import {
 
 /* API Query to server */
 
-/* Enter user */
-export function useQueryLogin() {
-	const { data, error, loaded, querySend } = useQueryPost();
+export const useQueryAuth = {
+	/* Enter user */
+	login() {
+		const { data, error, loaded, querySend } = useQuery.post();
 
-	const querySendLogin = async (dataQuery: ILogin) => {
-		querySend("/api/login", dataQuery, true);
-	};
+		const querySendLogin = async (dataQuery: ILogin) => {
+			querySend("/api/login", dataQuery, true);
+		};
 
-	const dataNew = data as IQueryAnswerLoginData;
-	const errorNew = error as IQueryAnswerError;
+		const dataNew = data as IQueryAnswerLoginData;
+		const errorNew = error as IQueryAnswerError;
 
-	const queryAnswer: IQueryAnswerLogin = {
-		dataLogin: dataNew,
-		errorLogin: errorNew,
-		loadedLogin: loaded,
-		querySendLogin,
-	};
+		const queryAnswer: IQueryAnswerLogin = {
+			dataLogin: dataNew,
+			errorLogin: errorNew,
+			loadedLogin: loaded,
+			querySendLogin,
+		};
 
-	return queryAnswer;
-}
+		return queryAnswer;
+	},
 
-/* Change password */
-export function useQueryChangePass() {
-	const { data, error, loaded, querySend } = useQueryPut();
+	/* Change password */
+	changePass() {
+		const { data, error, loaded, querySend } = useQuery.put();
 
-	const querySendChangePass = async (dataQuery: IChangePass) => {
-		querySend("/api/changepass", dataQuery, true);
-	};
+		const querySendChangePass = async (dataQuery: IChangePass) => {
+			querySend("/api/changepass", dataQuery, true);
+		};
 
-	const dataNew = data as IQueryAnswerMessageData;
-	const errorNew = error as IQueryAnswerError;
+		const dataNew = data as IQueryAnswerMessageData;
+		const errorNew = error as IQueryAnswerError;
 
-	const queryAnswer: IQueryAnswerChangePass = {
-		dataChangePass: dataNew,
-		errorChangePass: errorNew,
-		loadedChangePass: loaded,
-		querySendChangePass,
-	};
+		const queryAnswer: IQueryAnswerChangePass = {
+			dataChangePass: dataNew,
+			errorChangePass: errorNew,
+			loadedChangePass: loaded,
+			querySendChangePass,
+		};
 
-	return queryAnswer;
-}
+		return queryAnswer;
+	},
+};

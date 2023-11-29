@@ -1,12 +1,14 @@
 /* API Query to server */
 
 import { IQueryAnswerError } from "../iquerys.api";
-import { useQueryGet } from "../../api/querys.api.hook";
+import { useQuery } from "../../api/querys.api.hook";
 import {
 	IQueryGetProfile,
 	IQueryAnswerGetProfile,
 	IQueryGetProfiles,
 	IQueryAnswerGetProfiles,
+	IQueryCreateProfile,
+	IQueryAnswerCreateProfile,
 } from "./iprofile.api";
 import { IProfile } from "../../components/interfaces/iprofiles";
 
@@ -14,42 +16,65 @@ import { IProfile } from "../../components/interfaces/iprofiles";
     - id = 0 - get our profile, * - other profiles 
 */
 
-export function useQueryGetProfile() {
-	const { data, error, loaded, querySend } = useQueryGet();
+export const useQueryProfile = {
+	get() {
+		const { data, error, loaded, querySend } = useQuery.get();
 
-	const querySendGetProfile = async (dataQuery: IQueryGetProfile) => {
-		querySend("/api/profile", dataQuery, true);
-	};
+		const querySendGetProfile = async (dataQuery: IQueryGetProfile) => {
+			querySend("/api/profile", dataQuery, true);
+		};
 
-	const dataNew = data as IProfile;
-	const errorNew = error as IQueryAnswerError;
+		const dataNew = data as IProfile;
+		const errorNew = error as IQueryAnswerError;
 
-	const queryAnswer: IQueryAnswerGetProfile = {
-		dataGetProfile: dataNew,
-		errorGetProfile: errorNew,
-		loadedGetProfile: loaded,
-		querySendGetProfile,
-	};
+		const queryAnswer: IQueryAnswerGetProfile = {
+			dataGetProfile: dataNew,
+			errorGetProfile: errorNew,
+			loadedGetProfile: loaded,
+			querySendGetProfile,
+		};
 
-	return queryAnswer;
-}
+		return queryAnswer;
+	},
+	create() {
+		const { data, error, loaded, querySend } = useQuery.post();
 
-export function useQueryGetProfiles() {
-	const { data, error, loaded, querySend } = useQueryGet();
+		const querySendCreateProfile = async (dataQuery: IQueryCreateProfile) => {
+			querySend("/api/profile", dataQuery, true);
+		};
 
-	const querySendGetProfiles = async (dataQuery: IQueryGetProfiles) => {
-		querySend("/api/profiles", dataQuery, true);
-	};
+		const dataNew = data as IProfile;
+		const errorNew = error as IQueryAnswerError;
 
-	const dataNew = data as IProfile[];
-	const errorNew = error as IQueryAnswerError;
+		const queryAnswer: IQueryAnswerCreateProfile = {
+			dataCreateProfile: dataNew,
+			errorCreateProfile: errorNew,
+			loadedCreateProfile: loaded,
+			querySendCreateProfile,
+		};
 
-	const queryAnswer: IQueryAnswerGetProfiles = {
-		dataGetProfiles: dataNew,
-		errorGetProfiles: errorNew,
-		loadedGetProfiles: loaded,
-		querySendGetProfiles,
-	};
+		return queryAnswer;
+	},
+};
 
-	return queryAnswer;
-}
+export const useQueryProfiles = {
+	get() {
+		const { data, error, loaded, querySend } = useQuery.get();
+
+		const querySendGetProfiles = async (dataQuery: IQueryGetProfiles) => {
+			querySend("/api/profiles", dataQuery, true);
+		};
+
+		const dataNew = data as IProfile[];
+		const errorNew = error as IQueryAnswerError;
+
+		const queryAnswer: IQueryAnswerGetProfiles = {
+			dataGetProfiles: dataNew,
+			errorGetProfiles: errorNew,
+			loadedGetProfiles: loaded,
+			querySendGetProfiles,
+		};
+
+		return queryAnswer;
+	},
+};

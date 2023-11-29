@@ -16,136 +16,135 @@ function testOnBadTokenStatus(message: string) {
 	}
 }
 
-export function useQueryGet() {
-	const [data, setDataAnswer] = useState(null);
-	const [error, setErrorAnswer] = useState("");
-	const [loaded, setLoaded] = useState(false);
+export const useQuery = {
+	get() {
+		const [data, setDataAnswer] = useState(null);
+		const [error, setErrorAnswer] = useState("");
+		const [loaded, setLoaded] = useState(false);
 
-	const querySend = async (
-		link: string = "",
-		data: {} = { params: {} },
-		modalLoad: boolean = false
-	) => {
-		if (modalLoad) modalLoadingOnShow();
-		setLoaded(true);
+		const querySend = async (
+			link: string = "",
+			data: {} = { params: {} },
+			modalLoad: boolean = false
+		) => {
+			if (modalLoad) modalLoadingOnShow();
+			setLoaded(true);
 
-		const newData = {
-			params: data,
+			const newData = {
+				params: data,
+			};
+
+			await axios
+				.get(link, newData)
+				.then((payload) => {
+					setDataAnswer(payload.data);
+				})
+				.catch((error) => {
+					setErrorAnswer(error);
+					testOnBadTokenStatus(error.response.data.message);
+				})
+				.finally(() => {
+					if (modalLoad) modalLoadingOnHide();
+					setLoaded(false);
+				});
 		};
 
-		await axios
-			.get(link, newData)
-			.then((payload) => {
-				setDataAnswer(payload.data);
-			})
-			.catch((error) => {
-				setErrorAnswer(error);
-				testOnBadTokenStatus(error.response.data.message);
-			})
-			.finally(() => {
-				if (modalLoad) modalLoadingOnHide();
-				setLoaded(false);
-			});
-	};
+		const queryAnswer: IQueryAnswer = { data, error, loaded, querySend };
 
-	const queryAnswer: IQueryAnswer = { data, error, loaded, querySend };
+		return queryAnswer;
+	},
+	post() {
+		const [data, setDataAnswer] = useState(null);
+		const [error, setErrorAnswer] = useState("");
+		const [loaded, setLoaded] = useState(false);
 
-	return queryAnswer;
-}
+		const querySend = async (
+			link: string = "",
+			data: {} = {},
+			modalLoad: boolean = false,
+			config: {} = {}
+		) => {
+			if (modalLoad) modalLoadingOnShow();
+			setLoaded(true);
 
-export function useQueryPost() {
-	const [data, setDataAnswer] = useState(null);
-	const [error, setErrorAnswer] = useState("");
-	const [loaded, setLoaded] = useState(false);
+			await axios
+				.post(link, data, config)
+				.then((payload) => {
+					setDataAnswer(payload.data);
+				})
+				.catch((error) => {
+					setErrorAnswer(error);
+					testOnBadTokenStatus(error.response.data.message);
+				})
+				.finally(() => {
+					if (modalLoad) modalLoadingOnHide();
+					setLoaded(false);
+				});
+		};
 
-	const querySend = async (
-		link: string = "",
-		data: {} = {},
-		modalLoad: boolean = false,
-		config: {} = {}
-	) => {
-		if (modalLoad) modalLoadingOnShow();
-		setLoaded(true);
+		const queryAnswer: IQueryAnswer = { data, error, loaded, querySend };
 
-		await axios
-			.post(link, data, config)
-			.then((payload) => {
-				setDataAnswer(payload.data);
-			})
-			.catch((error) => {
-				setErrorAnswer(error);
-				testOnBadTokenStatus(error.response.data.message);
-			})
-			.finally(() => {
-				if (modalLoad) modalLoadingOnHide();
-				setLoaded(false);
-			});
-	};
+		return queryAnswer;
+	},
+	put() {
+		const [data, setDataAnswer] = useState(null);
+		const [error, setErrorAnswer] = useState("");
+		const [loaded, setLoaded] = useState(false);
 
-	const queryAnswer: IQueryAnswer = { data, error, loaded, querySend };
+		const querySend = async (
+			link: string = "",
+			data: {} = {},
+			modalLoad: boolean = false,
+			config: {} = {}
+		) => {
+			if (modalLoad) modalLoadingOnShow();
+			setLoaded(true);
 
-	return queryAnswer;
-}
+			await axios
+				.put(link, data, config)
+				.then((payload) => {
+					setDataAnswer(payload.data);
+				})
+				.catch((error) => {
+					setErrorAnswer(error);
+					testOnBadTokenStatus(error.response.data.message);
+				})
+				.finally(() => {
+					if (modalLoad) modalLoadingOnHide();
+					setLoaded(false);
+				});
+		};
 
-export function useQueryPut() {
-	const [data, setDataAnswer] = useState(null);
-	const [error, setErrorAnswer] = useState("");
-	const [loaded, setLoaded] = useState(false);
+		const queryAnswer: IQueryAnswer = { data, error, loaded, querySend };
 
-	const querySend = async (
-		link: string = "",
-		data: {} = {},
-		modalLoad: boolean = false,
-		config: {} = {}
-	) => {
-		if (modalLoad) modalLoadingOnShow();
-		setLoaded(true);
+		return queryAnswer;
+	},
+	delete() {
+		const [data, setDataAnswer] = useState(null);
+		const [error, setErrorAnswer] = useState("");
+		const [loaded, setLoaded] = useState(false);
 
-		await axios
-			.put(link, data, config)
-			.then((payload) => {
-				setDataAnswer(payload.data);
-			})
-			.catch((error) => {
-				setErrorAnswer(error);
-				testOnBadTokenStatus(error.response.data.message);
-			})
-			.finally(() => {
-				if (modalLoad) modalLoadingOnHide();
-				setLoaded(false);
-			});
-	};
+		const querySend = async (link: string = "", data: {} = {}, modalLoad: boolean = false) => {
+			if (modalLoad) modalLoadingOnShow();
+			setLoaded(true);
 
-	const queryAnswer: IQueryAnswer = { data, error, loaded, querySend };
+			await axios
+				.delete(link, { data })
+				.then((payload) => {
+					setDataAnswer(payload.data);
+				})
+				.catch((error) => {
+					setErrorAnswer(error);
+					testOnBadTokenStatus(error.response.data.message);
+				})
+				.finally(() => {
+					if (modalLoad) modalLoadingOnHide();
+					setLoaded(false);
+				});
+		};
 
-	return queryAnswer;
-}
+		const queryAnswer: IQueryAnswer = { data, error, loaded, querySend };
 
-export function useQueryDelete() {
-	const [data, setDataAnswer] = useState(null);
-	const [error, setErrorAnswer] = useState("");
-	const [loaded, setLoaded] = useState(false);
-
-	const querySend = async (link: string = "", data: {} = {}, modalLoad: boolean = false) => {
-		if (modalLoad) modalLoadingOnShow();
-		setLoaded(true);
-
-		await axios
-			.delete(link, { data })
-			.then((payload) => {
-				setDataAnswer(payload.data);
-			})
-			.catch((error) => {
-				setErrorAnswer(error);
-				testOnBadTokenStatus(error.response.data.message);
-			})
-			.finally(() => {
-				if (modalLoad) modalLoadingOnHide();
-				setLoaded(false);
-			});
-	};
-
-	const queryAnswer: IQueryAnswer = { data, error, loaded, querySend };
-
-	return queryAnswer;
-}
+		return queryAnswer;
+	},
+};

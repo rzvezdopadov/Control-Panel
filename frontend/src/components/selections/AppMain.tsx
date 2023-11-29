@@ -8,14 +8,14 @@ import { ACCTYPE } from "../../../../global/roles";
 import { DispatcherPanel } from "../pages/DispatcherPanel";
 import { AdminPanel } from "../pages/AdminPanel";
 import { MockPage } from "../pages/MockPage";
-import { useQueryGetProfile } from "../../api/profile/profile.api.hook";
+import { useQueryProfile } from "../../api/profile/profile.api.hook";
 import { useEffect } from "react";
 import { modalMessageOpen } from "../modal/ModalMessage";
 import { userMyProfileAction } from "../../store/reducers/profile";
 
 export function AppMain() {
 	const { jwt, userMyProfile } = store.getState();
-	const { dataGetProfile, errorGetProfile, querySendGetProfile } = useQueryGetProfile();
+	const { dataGetProfile, errorGetProfile, querySendGetProfile } = useQueryProfile.get();
 
 	useEffect(() => {
 		if (jwt) {

@@ -3,7 +3,7 @@ import { MainScrollWrapper } from "../wrappers/MainScrollWrapper";
 import { LabelWidget } from "../utils/Labels/Labels";
 import { useEffect, useState } from "react";
 import { IProfile } from "../interfaces/iprofiles";
-import { useQueryGetProfiles } from "../../api/profile/profile.api.hook";
+import { useQueryProfiles } from "../../api/profile/profile.api.hook";
 import { modalMessageOpen } from "../modal/ModalMessage";
 import { ACCTYPE } from "../../../../global/roles";
 import { Table } from "../utils/Tables/Tables";
@@ -13,7 +13,7 @@ export function AdminPanel() {
 	const { userMyProfile } = store.getState();
 	const [profiles, setProfiles] = useState<IProfile[]>([]);
 
-	const { dataGetProfiles, errorGetProfiles, querySendGetProfiles } = useQueryGetProfiles();
+	const { dataGetProfiles, errorGetProfiles, querySendGetProfiles } = useQueryProfiles.get();
 
 	useEffect(() => {
 		querySendGetProfiles({

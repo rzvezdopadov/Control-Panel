@@ -13,6 +13,21 @@ export interface IQueryAnswerGetProfile {
 	querySendGetProfile(data: IQueryGetProfile): void;
 }
 
+export interface IQueryCreateProfile {
+	login: string;
+	password: string;
+	place: string;
+	acctype: ACCTYPE;
+	bio: string;
+}
+
+export interface IQueryAnswerCreateProfile {
+	dataCreateProfile: IProfile;
+	errorCreateProfile: IQueryAnswerError;
+	loadedCreateProfile: boolean;
+	querySendCreateProfile(data: IQueryCreateProfile): void;
+}
+
 export interface IQueryGetProfiles {
 	acctype: ACCTYPE;
 }

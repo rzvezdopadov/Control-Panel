@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useFormFieldInputString } from "../../hooks/form.hook";
 import { ILogin } from "../../api/auth/iauth.api";
-import { useQueryLogin } from "../../api/auth/auth.api.hook";
+import { useQueryAuth } from "../../api/auth/auth.api.hook";
 import { store } from "../../store/store";
 import { jwtAction } from "../../store/reducers/auth";
 import { Button } from "../utils/Buttons/Buttons";
@@ -12,7 +12,7 @@ import { LabelWidget } from "../utils/Labels/Labels";
 import { modalMessageOpen } from "../modal/ModalMessage";
 
 export function Login() {
-	const { dataLogin, errorLogin, querySendLogin } = useQueryLogin();
+	const { dataLogin, errorLogin, querySendLogin } = useQueryAuth.login();
 	const login = useFormFieldInputString();
 	const password = useFormFieldInputString();
 
