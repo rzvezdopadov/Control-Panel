@@ -3,7 +3,6 @@ import { normalize } from "../../../utils/normalize";
 import { Request, Response } from "express";
 import { testToken } from "../auth/token";
 import { ACCTYPE } from "../../../global/roles";
-import { authUtils } from "../auth/authUtils";
 import { profileUtils } from "./profileUtils";
 
 interface IProfileCreateAPI {
@@ -33,7 +32,7 @@ export const profileAPI = {
 
 			if (!jwtDecode) return answerStatus.failJWT(res);
 
-			let profile = req.query as unknown as IProfileCreateAPI;
+			let profile = req.body as unknown as IProfileCreateAPI;
 			profile.login = normalize.deleteSpace(profile.login);
 			profile.password = normalize.deleteSpace(profile.password);
 
