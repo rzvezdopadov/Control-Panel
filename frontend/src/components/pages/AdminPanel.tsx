@@ -8,11 +8,12 @@ import { modalMessageOpen } from "../modal/ModalMessage";
 import { ACCTYPE } from "../../../../global/roles";
 import { Table } from "../utils/Tables/Tables";
 import { Button } from "../utils/Buttons/Buttons";
+import { ModalUserCreate } from "../modal/ModalUserCreate";
+import { useFormVisible } from "../../hooks/form.hook";
 
 export function AdminPanel() {
 	const { userMyProfile } = store.getState();
 	const [profiles, setProfiles] = useState<IProfile[]>([]);
-
 	const { dataGetProfiles, errorGetProfiles, querySendGetProfiles } = useQueryProfiles.get();
 
 	useEffect(() => {
@@ -33,15 +34,21 @@ export function AdminPanel() {
 		modalMessageOpen(errorGetProfiles.response.data.message);
 	}, [errorGetProfiles]);
 
+	const formModalAddUserVisible = useFormVisible(false);
+
 	return (
 		<MainScrollWrapper color={true} shadow={true}>
 			<LabelWidget value={`Администратор: ${userMyProfile.bio}`} />
-			<Button value={`Добавить пользователя`} />
+			<Button
+				value={`Добавить пользователя`}
+				onClick={() => formModalAddUserVisible.setVisible(true)}
+			/>
 			<Table
 				headTitle={["Место", "ФИО", "Логин", "Тип аккаунта", "userID"]}
 				propertySeq={["place", "bio", "login", "acctype", "userid"]}
 				data={profiles}
 			></Table>
+			<ModalUserCreate formVisible={formModalAddUserVisible} />
 		</MainScrollWrapper>
 	);
 }
