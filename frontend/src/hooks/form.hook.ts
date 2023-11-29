@@ -11,6 +11,32 @@ export const useFormFieldInputString = (initialValue: string = "") => {
 	return { value, onChange };
 };
 
+export const useFormFieldSelectString = (initialValue: string = "") => {
+	const [value, setValue] = React.useState(initialValue);
+	const onChange = React.useCallback(
+		(e: React.ChangeEvent<HTMLSelectElement>) => setValue(e.target.value),
+		[]
+	);
+	return { value, onChange };
+};
+
+export const useFormVisible = (initialValue: boolean) => {
+	const refDivVisible = React.useRef<HTMLDivElement>(null);
+	const [visible, setVisible] = React.useState(initialValue);
+
+	React.useEffect(() => {
+		if (!refDivVisible.current) return;
+
+		if (visible) {
+			refDivVisible.current.classList.remove("invisible");
+		} else {
+			refDivVisible.current.classList.add("invisible");
+		}
+	}, [visible]);
+
+	return { refDivVisible, visible, setVisible };
+};
+
 export const useRefDivVisible = (value: boolean) => {
 	const refDivVisible = React.useRef<HTMLDivElement>(null);
 
