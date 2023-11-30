@@ -79,7 +79,7 @@ export const initialStateShop: IShop = {
 };
 
 export const shopReducer = createReducer(initialStateShop, (builder) => {
-	builder.addCase(shopAction, (state: IShop, action: any) => {
+	builder.addCase(shopAction, (state: IShop, action: { payload: IShop }) => {
 		const shop = { ...action.payload };
 
 		return shop;

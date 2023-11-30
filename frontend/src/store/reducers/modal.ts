@@ -12,11 +12,14 @@ const initialStateModalLoading: IStateModalMessage = {
 };
 
 export const modalLoadingReducer = createReducer(initialStateModalLoading, (builder) => {
-	builder.addCase(modalLoadingAction, (state: IStateModalMessage, action: any) => {
-		const { enabled, text } = action.payload;
+	builder.addCase(
+		modalLoadingAction,
+		(state: IStateModalMessage, action: { payload: IStateModalMessage }) => {
+			const { enabled, text } = action.payload;
 
-		return { enabled, text };
-	});
+			return { enabled, text };
+		}
+	);
 });
 
 ////////////////////////////////////////////////////////////////////////
@@ -30,11 +33,14 @@ const initialStateModalMessage: IStateModalMessage = {
 };
 
 export const modalMessageReducer = createReducer(initialStateModalMessage, (builder) => {
-	builder.addCase(modalMessageAction, (state: IStateModalMessage, action: any) => {
-		let { enabled, text } = action.payload;
+	builder.addCase(
+		modalMessageAction,
+		(state: IStateModalMessage, action: { payload: IStateModalMessage }) => {
+			let { enabled, text } = action.payload;
 
-		if (!enabled) text = state.text;
+			if (!enabled) text = state.text;
 
-		return { enabled, text };
-	});
+			return { enabled, text };
+		}
+	);
 });
