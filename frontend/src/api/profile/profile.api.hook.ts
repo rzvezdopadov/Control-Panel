@@ -1,6 +1,6 @@
 /* API Query to server */
 
-import { IQueryAnswerError } from "../iquerys.api";
+import { IQueryAnswerError, IQueryAnswerMessageData } from "../iquerys.api";
 import { useQuery } from "../../api/querys.api.hook";
 import {
 	IQueryGetProfile,
@@ -9,6 +9,8 @@ import {
 	IQueryAnswerGetProfiles,
 	IQueryCreateProfile,
 	IQueryAnswerCreateProfile,
+	IQueryDeleteProfile,
+	IQueryAnswerDeleteProfile,
 } from "./iprofile.api";
 import { IProfile } from "../../components/interfaces/iprofiles";
 
@@ -51,6 +53,25 @@ export const useQueryProfile = {
 			errorCreateProfile: errorNew,
 			loadedCreateProfile: loaded,
 			querySendCreateProfile,
+		};
+
+		return queryAnswer;
+	},
+	delete() {
+		const { data, error, loaded, querySend } = useQuery.delete();
+
+		const querySendDeleteProfile = async (dataQuery: IQueryDeleteProfile) => {
+			querySend("/api/profile", dataQuery, true);
+		};
+
+		const dataNew = data as IQueryAnswerMessageData;
+		const errorNew = error as IQueryAnswerError;
+
+		const queryAnswer: IQueryAnswerDeleteProfile = {
+			dataDeleteProfile: dataNew,
+			errorDeleteProfile: errorNew,
+			loadedDeleteProfile: loaded,
+			querySendDeleteProfile,
 		};
 
 		return queryAnswer;

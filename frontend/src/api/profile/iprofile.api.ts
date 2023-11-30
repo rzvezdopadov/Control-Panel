@@ -1,6 +1,6 @@
 import { ACCTYPE } from "../../../../global/roles";
 import { IProfile } from "../../components/interfaces/iprofiles";
-import { IQueryAnswerError } from "../iquerys.api";
+import { IQueryAnswerError, IQueryAnswerMessageData } from "../iquerys.api";
 
 export interface IQueryGetProfile {
 	userid: string;
@@ -26,6 +26,17 @@ export interface IQueryAnswerCreateProfile {
 	errorCreateProfile: IQueryAnswerError;
 	loadedCreateProfile: boolean;
 	querySendCreateProfile(data: IQueryCreateProfile): void;
+}
+
+export interface IQueryDeleteProfile {
+	userid: string;
+}
+
+export interface IQueryAnswerDeleteProfile {
+	dataDeleteProfile: IQueryAnswerMessageData;
+	errorDeleteProfile: IQueryAnswerError;
+	loadedDeleteProfile: boolean;
+	querySendDeleteProfile(data: IQueryDeleteProfile): void;
 }
 
 export interface IQueryGetProfiles {
