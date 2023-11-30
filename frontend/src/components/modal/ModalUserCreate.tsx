@@ -9,14 +9,17 @@ import {
 import { ModalCloseFormWrapper } from "../wrappers/ModalFormWrapper";
 import { SelectFromArrValue } from "../utils/Selects/Selects";
 import { ACCTYPE } from "../../../../global/roles";
-import { useQueryProfile } from "../../api/profile/profile.api.hook";
+import { useQueryProfile, useQueryProfiles } from "../../api/profile/profile.api.hook";
 import { compare } from "../../../../utils/compare";
 import { modalMessageOpen } from "./ModalMessage";
 import { useEffect } from "react";
+import { userProfilesAction } from "../../store/reducers/profile";
+import { store } from "../../store/store";
 
 export function ModalUserCreate(payload: { formVisible: ReturnType<typeof useFormVisible> }) {
 	const { dataCreateProfile, errorCreateProfile, querySendCreateProfile } =
 		useQueryProfile.create();
+	const { dataGetProfiles, errorGetProfiles, querySendGetProfiles } = useQueryProfiles.get();
 	const login = useFormFieldInputString("");
 	const password = useFormFieldInputString("");
 	const bio = useFormFieldInputString("");
@@ -47,6 +50,9 @@ export function ModalUserCreate(payload: { formVisible: ReturnType<typeof useFor
 
 		payload.formVisible.setVisible(false);
 		modalMessageOpen("Успешно сохранено!");
+		querySendGetProfiles({
+			acctype: ACCTYPE.user,
+		});
 	}, [dataCreateProfile]);
 
 	useEffect(() => {
@@ -54,6 +60,18 @@ export function ModalUserCreate(payload: { formVisible: ReturnType<typeof useFor
 
 		modalMessageOpen(errorCreateProfile.response.data.message);
 	}, [errorCreateProfile]);
+
+	useEffect(() => {
+		if (!dataGetProfiles) return;
+
+		store.dispatch(userProfilesAction(dataGetProfiles));
+	}, [dataGetProfiles]);
+
+	useEffect(() => {
+		if (!errorGetProfiles) return;
+
+		modalMessageOpen(errorGetProfiles.response.data.message);
+	}, [errorGetProfiles]);
 
 	return (
 		<ModalCloseFormWrapper formVisible={payload.formVisible}>
