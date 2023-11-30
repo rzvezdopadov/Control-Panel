@@ -10,10 +10,10 @@ import { Table } from "../utils/Tables/Tables";
 import { Button } from "../utils/Buttons/Buttons";
 import { ModalUserCreate } from "../modal/ModalUserCreate";
 import { useFormVisible } from "../../hooks/form.hook";
+import { userProfilesAction } from "../../store/reducers/profile";
 
 export function AdminPanel() {
-	const { userMyProfile } = store.getState();
-	const [profiles, setProfiles] = useState<IProfile[]>([]);
+	const { userMyProfile, userProfiles } = store.getState();
 	const { dataGetProfiles, errorGetProfiles, querySendGetProfiles } = useQueryProfiles.get();
 
 	useEffect(() => {
@@ -25,7 +25,7 @@ export function AdminPanel() {
 	useEffect(() => {
 		if (!dataGetProfiles) return;
 
-		setProfiles(dataGetProfiles);
+		store.dispatch(userProfilesAction(dataGetProfiles));
 	}, [dataGetProfiles]);
 
 	useEffect(() => {
@@ -46,8 +46,8 @@ export function AdminPanel() {
 			<Table
 				headTitle={["Место", "ФИО", "Логин", "Тип аккаунта", "userID"]}
 				propertySeq={["place", "bio", "login", "acctype", "userid"]}
-				data={profiles}
-			></Table>
+				data={userProfiles}
+			/>
 			<ModalUserCreate formVisible={formModalAddUserVisible} />
 		</MainScrollWrapper>
 	);
