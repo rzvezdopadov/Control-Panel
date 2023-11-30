@@ -15,11 +15,23 @@ export const initialStateUserMyProfile: IProfile = {
 };
 
 export const userMyProfileReducer = createReducer(initialStateUserMyProfile, (builder) => {
-	builder.addCase(userMyProfileAction, (state: IProfile, action: any) => {
+	builder.addCase(userMyProfileAction, (state: IProfile, action: { payload: IProfile }) => {
 		const profile = { ...action.payload };
 
 		return profile;
 	});
 });
-
 ////////////////////////////////////////////////////////////////////////
+export const USER_PROFILES = "USER_PROFILES";
+
+export const userProfilesAction = createAction<IProfile[]>(USER_PROFILES);
+
+export const initialStateUserProfiles: IProfile[] = [];
+
+export const userProfilesReducer = createReducer(initialStateUserProfiles, (builder) => {
+	builder.addCase(userProfilesAction, (state: IProfile[], action: { payload: IProfile[] }) => {
+		const profiles = [...action.payload];
+
+		return profiles;
+	});
+});
