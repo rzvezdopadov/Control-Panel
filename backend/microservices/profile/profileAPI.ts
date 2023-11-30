@@ -125,10 +125,35 @@ export const profileAPI = {
 
 			if (isAuthCreate)
 				return res.status(201).json({
-					msg: "Пользователь успешно создан!",
+					msg: "Пользователь успешно изменен!",
 				});
 
 			return answerStatus.err400(res, "Возникла ошибка при регистрации!");
+		} catch (error) {
+			console.log(error);
+			return answerStatus.err500(res, "Что-то пошло не так при аутентификации!");
+		}
+	},
+	async delete(req: Request, res: Response) {
+		try {
+			let { jwt }: { jwt: string } = req.cookies;
+			jwt = normalize.deleteSpace(jwt);
+
+			const jwtDecode = await testToken(jwt);
+
+			if (!jwtDecode) return answerStatus.failJWT(res);
+
+			let { userid } = req.body as unknown as { userid: string };
+			userid = normalize.deleteSpace(userid);
+
+			const isDelete = await profileUtils.delete(userid);
+
+			if (isDelete)
+				return res.status(204).json({
+					msg: "Пользователь успешно удален!",
+				});
+
+			return answerStatus.err400(res, "Возникла ошибка при удалении!");
 		} catch (error) {
 			console.log(error);
 			return answerStatus.err500(res, "Что-то пошло не так при аутентификации!");

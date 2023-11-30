@@ -30,7 +30,7 @@ export const profileUtils = {
 				bio: profile.bio,
 			};
 
-			const answer = profileDB.create(profileNew);
+			const answer = await profileDB.create(profileNew);
 
 			return answer;
 		} catch (error) {
@@ -38,9 +38,9 @@ export const profileUtils = {
 			return undefined;
 		}
 	},
-	async getFull(userId: string) {
+	async getFull(userid: string) {
 		try {
-			const profile = await profileDB.getFull(userId);
+			const profile = await profileDB.getFull(userid);
 
 			return profile;
 		} catch (error) {
@@ -48,9 +48,9 @@ export const profileUtils = {
 			return undefined;
 		}
 	},
-	async getShort(userId: string) {
+	async getShort(userid: string) {
 		try {
-			const profile = await profileDB.getShort(userId);
+			const profile = await profileDB.getShort(userid);
 
 			return profile;
 		} catch (error) {
@@ -75,6 +75,16 @@ export const profileUtils = {
 			return answer;
 		} catch (error) {
 			console.log(`${TimeDate.getTimedateNow()} profileUtils => changeShort: `, error);
+			return undefined;
+		}
+	},
+	async delete(userid: string) {
+		try {
+			const answer = await profileDB.delete(userid);
+
+			return answer;
+		} catch (error) {
+			console.log(`${TimeDate.getTimedateNow()} profileUtils => delete: `, error);
 			return undefined;
 		}
 	},

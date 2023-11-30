@@ -103,4 +103,18 @@ export const profileDB = {
 			return undefined;
 		}
 	},
+	async delete(userid: string): Promise<number> {
+		try {
+			let queryStr = `DELETE FROM ${DATABASE.auth} WHERE userid = '${userid}'`;
+
+			const answerDB = await poolDB.query(queryStr);
+
+			if (answerDB.rowCount) return answerDB.rowCount;
+
+			return 0;
+		} catch (error) {
+			console.log(`${TimeDate.getTimedateNow()} profileDB => delete: `, error);
+			return 0;
+		}
+	},
 };
