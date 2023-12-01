@@ -4,6 +4,7 @@ import { Request, Response } from "express";
 import { testToken } from "../auth/token";
 import { ACCTYPE } from "../../../global/roles";
 import { profileUtils } from "./profileUtils";
+import { authDB } from "../auth/authDB";
 
 interface IProfileCreateAPI {
 	login: string;
@@ -35,6 +36,10 @@ export const profileAPI = {
 			let profile = req.body as unknown as IProfileCreateAPI;
 			profile.login = normalize.deleteSpace(profile.login);
 			profile.password = normalize.deleteSpace(profile.password);
+
+			const isLoginHave = await authDB.getIdByLogin(profile.login);
+
+			if (isLoginHave) return answerStatus.err400(res, "Такой логин уже зарегистрирован!");
 
 			if (!profile.login || !profile.password || !profile.acctype || !profile.bio)
 				return answerStatus.err400(res, "Один из параметров задан неверно!");
