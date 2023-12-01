@@ -1,4 +1,16 @@
-export function Table(payload: { headTitle: string[]; propertySeq: string[]; data: any[] }) {
+import { convertTextToSign } from "../../../helpers/convert";
+
+interface IDeleteProperty {
+	property: string;
+	clbk: Function;
+}
+
+export function Table(payload: {
+	headTitle: string[];
+	propertySeq: string[];
+	data: any[];
+	delete?: IDeleteProperty;
+}) {
 	return (
 		<table className="my-2" key={`${payload.headTitle}`}>
 			<thead>
@@ -16,12 +28,38 @@ export function Table(payload: { headTitle: string[]; propertySeq: string[]; dat
 						<tr key={`tbody${JSON.stringify(obj)}`}>
 							{payload.propertySeq.map((value) => (
 								<td
-									className="border-2 p-1 border-lime-400 "
+									className="border-2 p-1 border-lime-400"
 									key={`trtd${JSON.stringify(obj) + value}`}
 								>
 									{obj[value]}
 								</td>
 							))}
+							{payload?.delete ? (
+								<td
+									className="border-2 p-1 border-lime-400 "
+									key={`trtd${
+										JSON.stringify(obj) + obj[payload.delete.property]
+									}`}
+								>
+									<span
+										className="cursor-pointer"
+										title="Удалить"
+										onClick={() =>
+											payload?.delete?.clbk(
+												JSON.parse(
+													`{"${payload.delete.property}":"${
+														obj[payload.delete.property]
+													}"}`
+												)
+											)
+										}
+									>
+										{convertTextToSign("&#10060;")}
+									</span>
+								</td>
+							) : (
+								<></>
+							)}
 						</tr>
 					))
 				) : (
