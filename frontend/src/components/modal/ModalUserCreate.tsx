@@ -24,7 +24,7 @@ export function ModalUserCreate(payload: { formVisible: ReturnType<typeof useFor
 	const password = useFormFieldInputString("");
 	const bio = useFormFieldInputString("");
 	const place = useFormFieldInputString("");
-	const acctype = useFormFieldSelectString(ACCTYPE.user);
+	const acctype = useFormFieldSelectString(ACCTYPE.user as string);
 
 	const buttonSaveHandler = () => {
 		if (!compare.rangeCountChr(login.value, 5, 30))
@@ -53,6 +53,12 @@ export function ModalUserCreate(payload: { formVisible: ReturnType<typeof useFor
 		querySendGetProfiles({
 			acctype: ACCTYPE.user,
 		});
+
+		login.setValue("");
+		password.setValue("");
+		bio.setValue("");
+		place.setValue("");
+		acctype.setValue(ACCTYPE.user);
 	}, [dataCreateProfile]);
 
 	useEffect(() => {
