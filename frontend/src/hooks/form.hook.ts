@@ -8,7 +8,7 @@ export const useFormFieldInputString = (initialValue: string = "") => {
 		(e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value),
 		[]
 	);
-	return { value, onChange };
+	return { value, onChange, setValue };
 };
 
 export const useFormFieldSelectString = (initialValue: string = "") => {
@@ -17,7 +17,7 @@ export const useFormFieldSelectString = (initialValue: string = "") => {
 		(e: React.ChangeEvent<HTMLSelectElement>) => setValue(e.target.value),
 		[]
 	);
-	return { value, onChange };
+	return { value, onChange, setValue };
 };
 
 export const useFormVisible = (initialValue: boolean) => {
