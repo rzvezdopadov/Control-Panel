@@ -33,13 +33,17 @@ export async function initDBProfile(): Promise<boolean> {
 			bio: "Диспетчер",
 		});
 
-		await testHaveUserOrAdd({
-			login: "user11",
-			password: "123456789",
-			acctype: ACCTYPE.user,
-			place: "1.1",
-			bio: "Пользователь место 1.1",
-		});
+		for (let i = 1; i < 33; i++) {
+			for (let j = 1; j < 6; j++) {
+				await testHaveUserOrAdd({
+					login: `user${i}${j}`,
+					password: `123456789`,
+					acctype: ACCTYPE.user,
+					place: `${i}.${j}`,
+					bio: "Пользователь",
+				});
+			}
+		}
 
 		return true;
 	} catch (error) {
