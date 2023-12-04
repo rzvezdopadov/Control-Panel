@@ -3,15 +3,16 @@ import { store } from "../../store/store";
 import { MainWrapper } from "../wrappers/MainWrapper";
 import { Logout } from "../pages/Logout";
 import { Login } from "../pages/Login";
-import { UserQueryDispatcher } from "../pages/UserQueryDispatcher";
+import { UserQueryDispatcher } from "../pages/user/UserQueryDispatcher";
 import { ACCTYPE } from "../../../../global/roles";
-import { DispatcherPanel } from "../pages/DispatcherPanel";
-import { AdminPanel } from "../pages/AdminPanel";
+import { DispatcherPanel } from "../pages/dispatcher/DispatcherPanel";
+import { AdminUsers } from "../pages/admin/AdminUsers";
 import { MockPage } from "../pages/MockPage";
 import { useQueryProfile } from "../../api/profile/profile.api.hook";
 import { useEffect } from "react";
 import { modalMessageOpen } from "../modal/ModalMessage";
 import { userMyProfileAction } from "../../store/reducers/profile";
+import { AdminAlarm } from "../pages/admin/AdminAlarm";
 
 export function AppMain() {
 	const { jwt, userMyProfile } = store.getState();
@@ -52,7 +53,8 @@ export function AppMain() {
 								</>
 							) : userMyProfile.acctype === ACCTYPE.admin ? (
 								<>
-									<Route path="/*" element={<AdminPanel />} />
+									<Route path="/alarm" element={<AdminAlarm />} />
+									<Route path="/*" element={<AdminUsers />} />
 								</>
 							) : (
 								<>

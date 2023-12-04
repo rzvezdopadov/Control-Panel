@@ -3,10 +3,14 @@ import { ILink } from "../interfaces/inavigation";
 import { store } from "../../store/store";
 import { ACCTYPE } from "../../../../global/roles";
 import { ButtonNavigationLink } from "../utils/Buttons/Buttons";
-import { Logout } from "../pages/Logout";
 
 export const linkNoAuth: ILink[] = [{ to: "/login", imgSrc: "", title: "Войти" }];
 export const linkAuthUser: ILink[] = [{ to: "/logout", imgSrc: "", title: "Выход" }];
+export const linkAuthAdmin: ILink[] = [
+	{ to: "/", imgSrc: "", title: "Пользователи" },
+	{ to: "/alarm", imgSrc: "", title: "Оповещения" },
+	{ to: "/logout", imgSrc: "", title: "Выход" },
+];
 
 export function Navigation(payload: { naviKey: string }) {
 	const { jwt, userMyProfile } = store.getState();
@@ -14,15 +18,25 @@ export function Navigation(payload: { naviKey: string }) {
 	const NavigationMemo = useMemo(() => {
 		return jwt ? (
 			<>
-				{linkAuthUser.map((link) => {
-					return (
-						<ButtonNavigationLink
-							link={link}
-							naviKey={payload.naviKey}
-							key={"linkAuthUser" + payload.naviKey + link.to}
-						/>
-					);
-				})}
+				{userMyProfile.acctype === ACCTYPE.admin
+					? linkAuthAdmin.map((link) => {
+							return (
+								<ButtonNavigationLink
+									link={link}
+									naviKey={payload.naviKey}
+									key={"linkAuthUser" + payload.naviKey + link.to}
+								/>
+							);
+					  })
+					: linkAuthUser.map((link) => {
+							return (
+								<ButtonNavigationLink
+									link={link}
+									naviKey={payload.naviKey}
+									key={"linkAuthUser" + payload.naviKey + link.to}
+								/>
+							);
+					  })}
 			</>
 		) : (
 			<>
