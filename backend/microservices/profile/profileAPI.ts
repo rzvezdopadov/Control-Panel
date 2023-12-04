@@ -44,6 +44,11 @@ export const profileAPI = {
 			if (!profile.login || !profile.password || !profile.acctype || !profile.bio)
 				return answerStatus.err400(res, "Один из параметров задан неверно!");
 
+			const isAdmin = await authDB.getAcctypeById(jwtDecode.userId);
+
+			if (isAdmin !== ACCTYPE.admin)
+				return answerStatus.err400(res, "Недостаточно прав для выполнения операции!");
+
 			const isAuthCreate = await profileUtils.create(profile);
 
 			if (isAuthCreate)
@@ -151,10 +156,21 @@ export const profileAPI = {
 			let { userid } = req.body as unknown as { userid: string };
 			userid = normalize.deleteSpace(userid);
 
+			const isAdmin = await authDB.getAcctypeById(jwtDecode.userId);
+
+			if (isAdmin !== ACCTYPE.admin)
+				return answerStatus.err400(res, "Недостаточно прав для выполнения операции!");
+
+			const isAdminDelete = await authDB.getAcctypeById(userid);
+			const adminCount = await profileUtils.getShortAll(ACCTYPE.admin);
+
+			if (isAdminDelete === ACCTYPE.admin && adminCount && adminCount.length < 2)
+				return answerStatus.err400(res, "Невозможно удалить единственного администратора!");
+
 			const isDelete = await profileUtils.delete(userid);
 
 			if (isDelete)
-				return res.status(204).json({
+				return res.status(200).json({
 					msg: "Пользователь успешно удален!",
 				});
 
