@@ -36,8 +36,11 @@ export function AdminPanel() {
 
 	useEffect(() => {
 		if (!dataGetProfiles) return;
+		const dataGetProfilesNew = dataGetProfiles.sort((a, b) =>
+			Number(a.place) < Number(b.place) ? -1 : 0
+		);
 
-		store.dispatch(userProfilesAction(dataGetProfiles));
+		store.dispatch(userProfilesAction(dataGetProfilesNew));
 	}, [dataGetProfiles]);
 
 	useEffect(() => {
