@@ -32,6 +32,7 @@ app.use("/favicon.ico", express.static(__dirname + "./../favicon.ico"));
 
 app.use("/", require("./microservices/auth/authRoutes"));
 app.use("/", require("./microservices/profile/profileRoutes"));
+app.use("/", require("./microservices/alarm/alarmRoutes"));
 
 app.use("/", require("./api"));
 
