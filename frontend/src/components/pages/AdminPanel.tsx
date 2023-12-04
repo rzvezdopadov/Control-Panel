@@ -28,8 +28,6 @@ export function AdminPanel() {
 
 	const querySendDeleteProfileLocal = (obj: object) => {
 		querySendDeleteProfile({ ...obj } as IQueryDeleteProfile);
-
-		setTimeout(() => querySendGetProfilesLocal(), 1000);
 	};
 
 	useEffect(() => {
@@ -51,7 +49,8 @@ export function AdminPanel() {
 	useEffect(() => {
 		if (!dataDeleteProfile) return;
 
-		querySendGetProfilesLocal();
+		modalMessageOpen("Пользователь успешно удален!");
+		setTimeout(() => querySendGetProfilesLocal(), 1000);
 	}, [dataDeleteProfile]);
 
 	useEffect(() => {
@@ -81,7 +80,10 @@ export function AdminPanel() {
 				data={userProfiles}
 				delete={{ property: "userid", clbk: querySendDeleteProfileLocal }}
 			/>
-			<ModalUserCreate formVisible={formModalAddUserVisible} />
+			<ModalUserCreate
+				formVisible={formModalAddUserVisible}
+				profileUpdate={querySendGetProfilesLocal}
+			/>
 		</MainScrollWrapper>
 	);
 }
