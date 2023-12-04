@@ -1,8 +1,8 @@
-import { store } from "../../store/store";
-import { Button } from "../utils/Buttons/Buttons";
-import { FormWrapper } from "../wrappers/FormWrapper";
-import { MainScrollWrapper } from "../wrappers/MainScrollWrapper";
-import { Label, LabelWidget } from "../utils/Labels/Labels";
+import { store } from "../../../store/store";
+import { Button } from "../../utils/Buttons/Buttons";
+import { FormWrapper } from "../../wrappers/FormWrapper";
+import { MainScrollWrapper } from "../../wrappers/MainScrollWrapper";
+import { Label, LabelWidget } from "../../utils/Labels/Labels";
 
 export function UserQueryDispatcher() {
 	const { userMyProfile } = store.getState();

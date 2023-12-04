@@ -1,19 +1,19 @@
-import { store } from "../../store/store";
-import { MainScrollWrapper } from "../wrappers/MainScrollWrapper";
-import { LabelWidget } from "../utils/Labels/Labels";
+import { store } from "../../../store/store";
+import { MainScrollWrapper } from "../../wrappers/MainScrollWrapper";
+import { LabelWidget } from "../../utils/Labels/Labels";
 import { useEffect, useState } from "react";
-import { useQueryProfile, useQueryProfiles } from "../../api/profile/profile.api.hook";
-import { modalMessageOpen } from "../modal/ModalMessage";
-import { ACCTYPE } from "../../../../global/roles";
-import { Table } from "../utils/Tables/Tables";
-import { Button } from "../utils/Buttons/Buttons";
-import { ModalUserCreate } from "../modal/ModalUserCreate";
-import { useFormVisible } from "../../hooks/form.hook";
-import { userProfilesAction } from "../../store/reducers/profile";
-import { SelectFromArrValue } from "../utils/Selects/Selects";
-import { IQueryDeleteProfile } from "../../api/profile/iprofile.api";
+import { useQueryProfile, useQueryProfiles } from "../../../api/profile/profile.api.hook";
+import { modalMessageOpen } from "../../modal/ModalMessage";
+import { ACCTYPE } from "../../../../../global/roles";
+import { Table } from "../../utils/Tables/Tables";
+import { Button } from "../../utils/Buttons/Buttons";
+import { ModalUserCreate } from "../../modal/ModalUserCreate";
+import { useFormVisible } from "../../../hooks/form.hook";
+import { userProfilesAction } from "../../../store/reducers/profile";
+import { SelectFromArrValue } from "../../utils/Selects/Selects";
+import { IQueryDeleteProfile } from "../../../api/profile/iprofile.api";
 
-export function AdminPanel() {
+export function AdminUsers() {
 	const { userMyProfile, userProfiles } = store.getState();
 	const { dataGetProfiles, errorGetProfiles, querySendGetProfiles } = useQueryProfiles.get();
 	const { dataDeleteProfile, errorDeleteProfile, querySendDeleteProfile } =

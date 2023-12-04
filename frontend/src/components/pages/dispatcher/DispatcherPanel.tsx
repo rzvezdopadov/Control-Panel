@@ -1,8 +1,8 @@
-import { store } from "../../store/store";
-import { Button } from "../utils/Buttons/Buttons";
-import { MainScrollWrapper } from "../wrappers/MainScrollWrapper";
-import { LabelWidget } from "../utils/Labels/Labels";
-import { Delimiter, Place, PlacesRowWrapper } from "../utils/Places/Places";
+import { store } from "../../../store/store";
+import { Button } from "../../utils/Buttons/Buttons";
+import { MainScrollWrapper } from "../../wrappers/MainScrollWrapper";
+import { LabelWidget } from "../../utils/Labels/Labels";
+import { Delimiter, Place, PlacesRowWrapper } from "../../utils/Places/Places";
 
 export function DispatcherPanel() {
 	const { userMyProfile, shop } = store.getState();
