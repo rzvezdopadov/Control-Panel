@@ -1,4 +1,6 @@
 import React from "react";
+import { ButtonScrollToTop } from "../utils/Buttons/Buttons";
+import { invisibleOnScrollToTop } from "../../helpers/scroll";
 
 export function MainScrollWrapper(payload: {
 	children?: React.ReactNode;
@@ -7,6 +9,9 @@ export function MainScrollWrapper(payload: {
 	color?: boolean;
 	center?: boolean;
 }) {
+	const scrollTopDiv = React.useRef(null);
+	const scrollToTopBtn = React.useRef(null);
+
 	return (
 		<div
 			className={`flex flex-col fixed items-center text-neutral-50 rounded-xl overflow-y-scroll top-20 bottom-4 left-0 right-0 m-auto px-2 pt-2 pb-2 z-0${
@@ -14,7 +19,10 @@ export function MainScrollWrapper(payload: {
 			}${payload.color ? " bg-gray-700" : ""}${
 				payload.center ? " justify-center" : " justify-start"
 			}`}
+			onScroll={(e) => invisibleOnScrollToTop(e, scrollToTopBtn)}
+			ref={scrollTopDiv}
 		>
+			<ButtonScrollToTop scrollTopDiv={scrollTopDiv} scrollToTopBtn={scrollToTopBtn} />
 			{payload.children ? payload.children : <></>}
 		</div>
 	);

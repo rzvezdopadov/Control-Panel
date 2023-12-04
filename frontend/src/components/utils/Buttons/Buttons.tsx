@@ -2,6 +2,7 @@ import { ILink } from "../../interfaces/inavigation";
 import { Link } from "react-router-dom";
 import { ButtonNaviWrapper } from "./ButtonsWrapper";
 import React, { MouseEventHandler } from "react";
+import { scrollToTop } from "../../../helpers/scroll";
 
 export const Button = React.forwardRef(
 	(
@@ -70,6 +71,23 @@ export function ButtonClose(payload: {
 			>
 				X
 			</button>
+		</div>
+	);
+}
+
+export function ButtonScrollToTop(payload: {
+	scrollTopDiv: React.MutableRefObject<null>;
+	scrollToTopBtn: React.RefObject<HTMLDivElement>;
+}) {
+	return (
+		<div
+			ref={payload.scrollToTopBtn}
+			onClick={() => {
+				scrollToTop(payload.scrollTopDiv);
+			}}
+			className="flex fixed invisible right-0 m-4 bg-slate-900 rotate-[270deg] shadow-[0px_0px_2px_2px] shadow-lime-300 justify-center items-center flex-shrink-0 h-12 w-12 text-3xl rounded-full cursor-pointer z-10"
+		>
+			<div className="mb-0.5 ml-0.5">&#10148;</div>
 		</div>
 	);
 }
