@@ -9,7 +9,7 @@ import {
 import { ModalCloseFormWrapper } from "../wrappers/ModalFormWrapper";
 import { SelectFromArrValue } from "../utils/Selects/Selects";
 import { ACCTYPE } from "../../../../global/roles";
-import { useQueryProfile, useQueryProfiles } from "../../api/profile/profile.api.hook";
+import { useQueryProfile } from "../../api/profile/profile.api.hook";
 import { compare } from "../../../../utils/compare";
 import { modalMessageOpen } from "./ModalMessage";
 import { useEffect } from "react";
