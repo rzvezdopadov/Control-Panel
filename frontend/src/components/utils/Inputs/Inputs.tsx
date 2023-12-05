@@ -4,6 +4,7 @@ export function Input(payload: {
 	value?: string | number;
 	onChange?: ChangeEventHandler<HTMLInputElement>;
 	type?: string;
+	title?: string;
 	placeholder?: string;
 }) {
 	return (
@@ -11,7 +12,9 @@ export function Input(payload: {
 			<input
 				value={payload.value ? payload.value : ""}
 				onChange={payload.onChange ? payload.onChange : () => {}}
-				title={payload.placeholder ? payload.placeholder : ""}
+				title={
+					payload.title ? payload.title : payload.placeholder ? payload.placeholder : ""
+				}
 				className="flex text-center rounded-md border-2 border-lime-300 bg-inherit text-white m-0.5 py-1 px-3"
 				type={payload.type ? payload.type : "button"}
 				placeholder={payload.placeholder ? payload.placeholder : ""}
