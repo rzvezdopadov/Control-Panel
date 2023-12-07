@@ -1,7 +1,7 @@
 import express from "express";
-// import { socketHandler } from "./microservices/sockets/socketRoutes";
 import { initDB } from "./db/init";
 import { TimeDate } from "../utils/timedate";
+import { socketRoutes } from "./microservices/socket/socketRoutes";
 const config = require("config");
 const cookieParser = require("cookie-parser");
 
@@ -42,7 +42,7 @@ const socketPORT = config.get("socketPort") || 8000;
 const http = require("http").Server(app);
 const socketIO = require("socket.io")(http);
 
-// socketIO.on("connection", (socket) => socketHandler(socketIO, socket));
+socketIO.on("connection", (socket) => socketRoutes(socketIO, socket));
 
 async function startSocket() {
 	try {
@@ -66,4 +66,4 @@ async function startServer() {
 
 initDB();
 startServer();
-// startSocket();
+startSocket();
