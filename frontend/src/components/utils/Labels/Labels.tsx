@@ -10,7 +10,7 @@ export function Label(payload: {
 }) {
 	return (
 		<label
-			className={`flex justify-center my-2 rounded-md text-white${
+			className={`flex justify-center rounded-md text-white${
 				payload.bold ? " font-bold" : ""
 			}${payload.fontsize ? ` ${payload.fontsize}` : ""}${
 				payload.bgcolor ? ` ${payload.bgcolor}` : ""
