@@ -28,4 +28,9 @@ export const TimeDate = {
 
 		return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
 	},
+	getMonth(): number {
+		const date = new Date();
+		const month = date.getMonth() + 1;
+		return month;
+	},
 };

@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
+import { TimeDate } from "../../utils/timedate";
 import "./App.css";
+import { Holiday } from "./components/additions/Holiday";
 import { ModalLoading } from "./components/modal/ModalLoading";
 import { ModalMessage } from "./components/modal/ModalMessage";
 import { AppHeader } from "./components/selections/AppHeader";
@@ -11,6 +14,7 @@ function App() {
 			<AppMain />
 			<ModalLoading />
 			<ModalMessage />
+			<Holiday />
 		</div>
 	);
 }
