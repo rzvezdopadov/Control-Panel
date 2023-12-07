@@ -3,11 +3,15 @@ import { Button } from "../../utils/Buttons/Buttons";
 import { MainScrollWrapper } from "../../wrappers/MainScrollWrapper";
 import { LabelWidget } from "../../utils/Labels/Labels";
 import { Delimiter, Place, PlacesRowWrapper } from "../../utils/Places/Places";
+import { SOCKET_COMMAND } from "../../../../../global/interfaces/isocket";
+import { socket } from "../../../socket/socket";
 
 export function DispatcherPanel() {
 	const { userMyProfile, shop } = store.getState();
 
-	const btnResetClickHandler = () => {};
+	const btnResetClickHandler = () => {
+		socket.send(SOCKET_COMMAND.clearAllPosition, {});
+	};
 
 	return (
 		<MainScrollWrapper color={true} shadow={true}>

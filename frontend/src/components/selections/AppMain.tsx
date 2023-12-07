@@ -13,6 +13,9 @@ import { useEffect } from "react";
 import { modalMessageOpen } from "../modal/ModalMessage";
 import { userMyProfileAction } from "../../store/reducers/profile";
 import { AdminAlarm } from "../pages/admin/AdminAlarm";
+import { Socket } from "../utils/Socket";
+import { socket } from "../../socket/socket";
+import { SOCKET_COMMAND } from "../../../../global/interfaces/isocket";
 
 export function AppMain() {
 	const { jwt, userMyProfile } = store.getState();
@@ -21,6 +24,7 @@ export function AppMain() {
 	useEffect(() => {
 		if (jwt) {
 			setTimeout(() => querySendGetProfile({ userid: "0" }), 200);
+			socket.send(SOCKET_COMMAND.getJWT, { jwt });
 		}
 	}, [jwt]);
 
@@ -73,6 +77,7 @@ export function AppMain() {
 					</>
 				)}
 			</Routes>
+			{jwt ? <Socket></Socket> : <></>}
 		</MainWrapper>
 	);
 }
