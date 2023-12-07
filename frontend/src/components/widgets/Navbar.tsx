@@ -8,7 +8,7 @@ export function Navbar() {
 				src={peoples}
 				alt="Logo"
 			/>
-			<span className="m-4 text-lg text-gray-200">Диспетчерский пульт</span>
+			<span className="m-4 text-xl text-gray-200">Диспетчерский пульт</span>
 		</div>
 	);
 }
