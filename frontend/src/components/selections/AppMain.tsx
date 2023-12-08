@@ -16,14 +16,18 @@ import { AdminAlarm } from "../pages/admin/AdminAlarm";
 import { Socket } from "../utils/Socket";
 import { socket } from "../../socket/socket";
 import { SOCKET_COMMAND } from "../../../../global/interfaces/isocket";
+import { useQueryAlarm } from "../../api/alarm/alarm.api.hook";
+import { alarmAction } from "../../store/reducers/alarm";
 
 export function AppMain() {
 	const { jwt, userMyProfile } = store.getState();
 	const { dataGetProfile, errorGetProfile, querySendGetProfile } = useQueryProfile.get();
+	const { dataGetAlarm, errorGetAlarm, querySendGetAlarm } = useQueryAlarm.get();
 
 	useEffect(() => {
 		if (jwt) {
 			setTimeout(() => querySendGetProfile({ userid: "0" }), 200);
+			setTimeout(() => querySendGetAlarm(), 400);
 			socket.send(SOCKET_COMMAND.getJWT, { jwt });
 		}
 	}, [jwt]);
@@ -39,6 +43,18 @@ export function AppMain() {
 
 		modalMessageOpen(errorGetProfile.response.data.message);
 	}, [errorGetProfile]);
+
+	useEffect(() => {
+		if (!dataGetAlarm) return;
+
+		store.dispatch(alarmAction(dataGetAlarm));
+	}, [dataGetAlarm]);
+
+	useEffect(() => {
+		if (!errorGetAlarm) return;
+
+		modalMessageOpen(errorGetAlarm.response.data.message);
+	}, [errorGetAlarm]);
 
 	return (
 		<MainWrapper>

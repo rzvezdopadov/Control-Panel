@@ -4,6 +4,7 @@ import { SOCKET_COMMAND } from "../../../../global/interfaces/isocket";
 import { IShop } from "../../../../global/interfaces/ishop";
 import { store } from "../../store/store";
 import { shopAction } from "../../store/reducers/shop";
+import { alarmHandler } from "../../socket/alarm";
 
 export function Socket() {
 	useEffect(() => {
@@ -13,7 +14,7 @@ export function Socket() {
 			socket.send(SOCKET_COMMAND.getJWT, { jwt: jwt });
 		});
 		socket.endPointAdd(SOCKET_COMMAND.setState, (shop: IShop) => {
-			store.dispatch(shopAction(shop));
+			alarmHandler(shop);
 		});
 
 		return () => {

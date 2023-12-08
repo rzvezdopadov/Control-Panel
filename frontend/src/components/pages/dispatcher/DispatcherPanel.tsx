@@ -5,9 +5,13 @@ import { LabelWidget } from "../../utils/Labels/Labels";
 import { Delimiter, Place, PlacesRowWrapper } from "../../utils/Places/Places";
 import { SOCKET_COMMAND } from "../../../../../global/interfaces/isocket";
 import { socket } from "../../../socket/socket";
+import { useState } from "react";
 
 export function DispatcherPanel() {
 	const { userMyProfile, shop } = store.getState();
+	const [sound, setSound] = useState(false);
+
+	const btnSoundEnClickHandler = () => setSound(true);
 
 	const btnResetClickHandler = () => {
 		socket.send(SOCKET_COMMAND.clearAllPosition, {});
@@ -18,6 +22,11 @@ export function DispatcherPanel() {
 			<LabelWidget value={`Диспетчер: ${userMyProfile.bio}`} />
 
 			<div className="flex flex-shrink-0 h-16">
+				{sound ? (
+					<></>
+				) : (
+					<Button value={`Включить звук`} onClick={btnSoundEnClickHandler} />
+				)}
 				<Button value={`Сброс`} onClick={btnResetClickHandler} />
 			</div>
 			<div className="flex flex-grow-0 h-full w-full">
