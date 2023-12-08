@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { TimeDate } from "../../utils/timedate";
 import "./App.css";
 import { Holiday } from "./components/additions/Holiday";
 import { ModalLoading } from "./components/modal/ModalLoading";
