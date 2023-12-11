@@ -33,7 +33,7 @@ export function MainScrollWrapper(payload: {
 			onScroll={(e) => invisibleOnScrollToTop(e, scrollToTopBtn)}
 			ref={scrollTopDiv}
 		>
-			<div className="flex text-2xl w-full justify-center text-white z-10">
+			<div className="flex text-2xl w-full justify-center text-lime-400 z-10">
 				{timecode ? `${TimeDate.getTimeDateFromTimeCode(timecode)}` : "XX.XX.XXXX XX:XX:XX"}
 			</div>
 
