@@ -104,7 +104,9 @@ export function DispatcherPanel() {
 				</div>
 				<div className="flex w-1/5 flex-col items-center bg-lime-800">
 					<Delimiter />
-					<Place value="11.1" />
+					<div className="flex">
+						<Place value="11.1" />
+					</div>
 				</div>
 				<div className="flex w-2/5 flex-col items-center bg-lime-900">
 					<Delimiter />
