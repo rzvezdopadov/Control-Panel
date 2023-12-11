@@ -3,7 +3,6 @@ import { socket } from "../../socket/socket";
 import { SOCKET_COMMAND } from "../../../../global/interfaces/isocket";
 import { IShop } from "../../../../global/interfaces/ishop";
 import { store } from "../../store/store";
-import { shopAction } from "../../store/reducers/shop";
 import { alarmHandler } from "../../socket/alarm";
 
 export function Socket() {
