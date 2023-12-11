@@ -22,25 +22,25 @@ export async function initDBProfile(): Promise<boolean> {
 			password: config.get("defaultPassAdmin"),
 			acctype: ACCTYPE.admin,
 			place: "admin",
-			bio: "Администратор",
+			bio: "",
 		});
 
 		await testHaveUserOrAdd({
 			login: "dispatcher",
-			password: "123456789",
+			password: "dispatcher1234",
 			acctype: ACCTYPE.dispatcher,
 			place: "dispatcher",
-			bio: "Диспетчер",
+			bio: "",
 		});
 
 		for (let i = 1; i < 33; i++) {
 			for (let j = 1; j < 6; j++) {
 				await testHaveUserOrAdd({
 					login: `user${i}${j}`,
-					password: `123456789`,
+					password: `user${i}${j}12345`,
 					acctype: ACCTYPE.user,
 					place: `${i}.${j}`,
-					bio: "Пользователь",
+					bio: "",
 				});
 			}
 		}
