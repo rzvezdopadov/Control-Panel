@@ -32,7 +32,7 @@ export function alarmHandler(shop: IShop) {
 		if (!alarm.single) {
 			const timeout = () => {
 				setTimeout(() => {
-					playSound();
+					if (shopEn) playSound();
 					if (timer) timeout();
 				}, alarm.period * 1000);
 			};
