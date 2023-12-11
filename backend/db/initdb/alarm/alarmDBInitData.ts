@@ -10,7 +10,7 @@ export async function initDBAlarmData(): Promise<number> {
 			isSave = await alarmDB.add({
 				type: 0,
 				single: false,
-				period: 0,
+				period: 5,
 			});
 		}
 
