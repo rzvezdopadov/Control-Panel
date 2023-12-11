@@ -16,22 +16,34 @@ function playSound() {
 export function alarmHandler(shop: IShop) {
 	store.dispatch(shopAction(shop));
 
-	const { userMyProfile, alarm } = store.getState();
-	if (userMyProfile.acctype !== ACCTYPE.dispatcher) return;
-
 	let shopEn = false;
 
-	for (const key in shop) {
-		if (shop[key as unknown as keyof IShop]) {
-			shopEn = true;
-			break;
+	const { userMyProfile, alarm } = store.getState();
+
+	const updateShopEn = () => {
+		const { shop } = store.getState();
+
+		if (userMyProfile.acctype !== ACCTYPE.dispatcher) return;
+
+		for (const key in shop) {
+			if (shop[key as unknown as keyof IShop]) {
+				shopEn = true;
+				break;
+			}
 		}
-	}
+	};
+
+	updateShopEn();
 
 	if (shopEn) {
 		if (!alarm.single) {
 			const timeout = () => {
+				if (!alarm.period) return;
+
 				setTimeout(() => {
+					shopEn = false;
+					updateShopEn();
+
 					if (shopEn) playSound();
 					if (timer) timeout();
 				}, alarm.period * 1000);
