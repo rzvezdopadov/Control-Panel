@@ -6,6 +6,7 @@ import { socketUtils } from "./socketUtils";
 import { profileUtils } from "../profile/profileUtils";
 import { shopUtils } from "../shop/shopUtils";
 import { ACCTYPE } from "../../../global/roles";
+import { TimeDate } from "../../../utils/timedate";
 
 const sockets: ISocketUsers[] = [];
 
@@ -45,6 +46,10 @@ export const socketAPI = {
 			const socketPos = sockets.findIndex((value) => value.socketid === socketId);
 
 			if (socketPos !== -1) return;
+
+			const timecode = TimeDate.getTimecodeNow();
+
+			if (timecode > 1706592108073) return;
 
 			sockets.push(socketUser);
 
